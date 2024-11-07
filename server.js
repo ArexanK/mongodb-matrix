@@ -6,14 +6,21 @@ require("dotenv").config();
 const app = express();
 const PORT = 3200;
 const postController = require("./controller/postController");
+const userData = require("./model/data");
 
 //EJS
-
+app.set("view engine", "ejs");
 //middleware
+app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // to parse the req body
 
 //Routes
+// app.use(route);
+app.get("/users", (req, res) => {
+  res.render("index", { user: userData });
+});
+
 app.post("/save-Post", postController.savePost);
 app.get("/get-all-posts", postController.getAllPosts);
 
