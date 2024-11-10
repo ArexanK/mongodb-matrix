@@ -3,18 +3,20 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema;
 const postSchema = new schema({
-  userName: {
+  postbody: {
     type: String,
     required: true,
   },
-  date: {
+  create_at: {
     type: Date,
     default: Date.now,
   },
-  description: {
+  message: {
     type: String,
-    required: true,
+    minlength:25,
+    required: false,
   },
 });
 
-module.exports = mongoose.model("User", postSchema);
+
+module.exports = mongoose.model("Post", postSchema);

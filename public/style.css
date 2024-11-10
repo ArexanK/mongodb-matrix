@@ -25,3 +25,8 @@ li {
 strong {
   color: #333;
 }
+.user-form {
+  margin-bottom: 50px;
+  border-bottom: 5px solid black;
+  padding-bottom: 50px;
+}

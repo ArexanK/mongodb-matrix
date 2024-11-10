@@ -1,28 +1,21 @@
-const postModel = require("../model/postModel");
+const post = require("../model/postModel.js");
 
-const savePost = (req, res) => {
-  let newPost = new postModel(req.body);
-  newPost
-    .save()
-    .then((post) => {
-      console.log("post is saved");
+//create a post
+const newPost = (req, res) => {
+    console.log(req.body)
+  const NewPost = new post(req.body);
+  NewPost.save()
+    .then(() => {
+      res.redirect("/");
+      console.log("post saved");
     })
     .catch((err) => {
-      throw err;
+      console.log(err);
     });
 };
 
-const getAllPosts = (req, res) => {
-   postModel.find()
-      .then(posts => {
-        res.send(posts)
-      })
-      .catch((err) => {
-        throw err;
-      });
-  };
 
 module.exports = {
-  savePost,
-  getAllPosts
+  newPost,
 };
+

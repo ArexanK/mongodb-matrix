@@ -9,26 +9,50 @@
   <title>Data</title>
 </head>
 <body>
-
   <h1>Timeline Data</h1>
   <ul>
-    <form action="/form/<%= user.id %>" method="post">
-      <label for="input_<%= user.id %>">add a new message</label>
-      <input type="text" name="input" id="input_<%= user.id %>">
-      <button type="submit">Submit</button>
-    </form>
-   
-      <% user.forEach(user => { %>
-          <li>
-              <h2><%= user.name %> - <%= user.createdAt %></h2>
-              <h3><%= user.message %></h3>
 
-              
-          </li>
+    <!--create user-->
+    <div class="user-form">
+      <form action="/add-user" method="Post">
+      <input name="userName" type="text" placeholder="username">
+      <input name="message" type="text" placeholder="message">
+      <button>add user with message</button>
+    </form>
+    </div>
+
+    <!-- post-->
+    <!-- <form action="/createPost" method="Post">
+      <input type="text" name="postbody">
+      <button>submit</button>
+    </form> -->
+
+    <% if (user.length !== 0) { %>
+      <% user.forEach(user => { %>
+        <li>
+          <h2><%= user.name %> - <%= user.createdAt %></h2>
+          <h3><%= user.message %></h3>
+    
+          <!-- comment form for each user -->
+          <form action="/add-comment/<%= user._id %>" method="post">
+            <input type="text" placeholder="add comment" name="commentOnPost">
+            <button>Post the comment</button>
+          </form>
+    
+          <!-- display user comment -->
+          <% if (user.comments && user.comments.length > 0) { %>
+            <ul>
+              <% user.comments.forEach(comment => { %>
+                <li><%= comment.content %> - <%= comment.createdAt %></li>
+              <% }) %>
+            </ul>
+          <% } %>
+        </li>
       <% }) %>
     <% } else { %>
       <h3>No data</h3>
-
+    <% } %>
+    
   </ul>
 </body>
 </html>
